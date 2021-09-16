@@ -27,7 +27,7 @@ const Container = styled.div`
   text-align: center;
 `
 
-export default function Home() {
+function App() {
   const [todo, setTodo] = useState("")
   const [todos, setTodos] = useState([])
 
@@ -67,3 +67,5 @@ export default function Home() {
     </Container>
   )
 }
+
+export default App
