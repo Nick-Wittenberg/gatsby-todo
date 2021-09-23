@@ -1,5 +1,7 @@
 import React, { useState } from "react"
 import styled, { css } from "styled-components"
+import Navbar from "../components/Navbar"
+import { GlobalStyles } from "../GlobalStyles.style"
 
 const Button = styled.button`
   background: transparent;
@@ -27,6 +29,17 @@ const Container = styled.div`
   text-align: center;
 `
 
+const CloseButton = styled.button`
+  background-color: palevioletred;
+  padding: 0.1rem 0.4rem;
+  border-radius: 0.2rem;
+  margin-left: 0.4rem;
+  position: relative;
+  font-weight: "bold";
+  font-size: 1.3rem;
+  font-family: Arial, Helvetica, sans-serif;
+`
+
 export default function Home() {
   const [todo, setTodo] = useState("")
   const [todos, setTodos] = useState([])
@@ -39,9 +52,17 @@ export default function Home() {
     }
   }
 
+  const onClose = event => {
+    setTodos([...todos].filter(todo => todo.title !== event.target.value))
+  }
+
   return (
-    <Container className="App">
-      <h1>Todo App!</h1>
+    <Container
+      className="App"
+      style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+    >
+      <GlobalStyles />
+      <Navbar />
       <form onSubmit={onSubmit}>
         <label htmlFor="todo">Add to do</label>
         <input
@@ -59,9 +80,28 @@ export default function Home() {
         </Button>
       </form>
       <h2>Todo List</h2>
-      <ul>
+      <ul
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          flexDirection: "column",
+          alignItems: "space-between",
+          maxWidth: "15rem",
+          textAlign: "center",
+        }}
+      >
         {todos.map((todo, index) => {
-          return <li key={`todo-${index}`}>{todo.title}</li>
+          return (
+            <li
+              key={`todo-${index}`}
+              style={{ display: "flex", justifyContent: "space-between" }}
+            >
+              {todo.title}
+              <CloseButton value={todo.title} onClick={onClose}>
+                x
+              </CloseButton>
+            </li>
+          )
         })}
       </ul>
     </Container>

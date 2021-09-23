@@ -1,11 +1,12 @@
 import React, { useState } from "react"
 import styled, { css } from "styled-components"
+import Navbar from "../components/Navbar"
 
 const Button = styled.button`
   background: transparent;
   border-radius: 5px;
-  border: 2px solid palevioletred;
-  color: palevioletred;
+  border: 2px solid red;
+  color: red;
   margin: 0 1em;
   padding: 0.25em 1em;
   transition: all ease 100ms;
@@ -41,7 +42,7 @@ function App() {
 
   return (
     <Container className="App">
-      <h1>Todo App!</h1>
+      <Navbar />
       <form onSubmit={onSubmit}>
         <label htmlFor="todo">Add to do</label>
         <input
